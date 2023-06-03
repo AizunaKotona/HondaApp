@@ -1,75 +1,123 @@
-import 'dart:convert';
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:syncfusion_flutter_charts/charts.dart';
+// endDrawer: Drawer(
+      //   child: Builder(
+      //     builder: (context) => Container(
+      //       child: ListView.separated(
+      //         padding: EdgeInsets.only(top: 40.0),
+      //         separatorBuilder: (context, index) => Divider(),
+      //         itemCount: 7,
+      //         itemBuilder: (context, index) {
+      //           if (index == 0) {
+      //             return ExpansionTile(
+      //               leading: Icon(Icons.person_2),
+      //               title: Text('User Name'),
+      //               children: [
+      //                 ListTile(
+      //                   leading: Text('   '),
+      //                   title: Text('User Profile'),
+      //                   onTap: () {
+      //                     Navigator.pushReplacementNamed(
+      //                         context, '/UserProfile');
+      //                   },
+      //                 ),
+      //                 ListTile(
+      //                   leading: Text('   '),
+      //                   title: Text('Change Password'),
+      //                   onTap: () {
+      //                     Navigator.pushReplacementNamed(context, '/ChangePassword');
+      //                   },
+      //                 ),
+      //               ],
+      //             );
+      //           }
 
-class ChartPage extends StatefulWidget {
-  const ChartPage({Key? key}) : super(key: key);
-
-  @override
-  _ChartPageState createState() => _ChartPageState();
-}
-
-class _ChartPageState extends State<ChartPage> {
-  bool _showData1 = false;
-bool _showData2 = false;
-bool _showData3 = false;
-bool _showData4 = false;
-bool _showData5 = false;
-bool _showData6 = false;
-bool _showData7 = false;
-
-
-  List<dynamic> _chartData = [];
-
-  Future<List<dynamic>> _fetchChartData() async {
-    final url = Uri.parse(
-        'http://192.168.1.136:8080/api/energys/month/2021-05-01/2021-05-30/6/MDB');
-    final response = await http.get(url);
-
-    if (response.statusCode == 200) {
-      final List<dynamic> jsonData = json.decode(response.body);
-      return jsonData;
-    } else {
-      throw Exception('Failed to load data');
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _fetchChartData().then((data) {
-      setState(() {
-        _chartData = data;
-      });
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Chart Example'),
-      ),
-      body: Center(
-        child: _chartData.isEmpty
-            ? CircularProgressIndicator()
-            : SfCartesianChart(
-                primaryXAxis: CategoryAxis(),
-                series: <ChartSeries>[
-                  ColumnSeries<dynamic, dynamic>(
-                    dataSource: _chartData,
-                    xValueMapper: (data, _) => data[1].toString(),
-                    yValueMapper: (data, _) => data[3],
-                  )
-                ],
-              ),
-              
-      ),
-      
-    );
-    
-  }
-  
-}
-
+      //           if (index == 1) {
+      //             return ListTile(
+      //               leading: FaIcon(FontAwesomeIcons.gauge),
+      //               title: Text('Power Status'),
+      //               onTap: () {
+      //                 Navigator.pushReplacementNamed(context, '/home');
+      //               },
+      //             );
+      //           } else if (index == 2) {
+      //             return ExpansionTile(
+      //               leading: FaIcon(FontAwesomeIcons.wrench),
+      //               title: Text('Metering Management'),
+      //               children: [
+      //                 ListTile(
+      //                   leading: Text('   '),
+      //                   title: Text('Group Meter'),
+      //                   onTap: () {
+      //                     Navigator.pushReplacementNamed(
+      //                         context, '/groupMeter');
+      //                   },
+      //                 ),
+      //                 ListTile(
+      //                   leading: Text('   '),
+      //                   title: Text('Profile'),
+      //                   onTap: () {
+      //                     Navigator.pushReplacementNamed(context, '/profile');
+      //                   },
+      //                 ),
+      //                 ListTile(
+      //                   leading: Text('   '),
+      //                   title: Text('Meter'),
+      //                   onTap: () {
+      //                     Navigator.pushReplacementNamed(context, '/meter');
+      //                   },
+      //                 ),
+      //               ],
+      //             );
+      //           } else if (index == 3) {
+      //             return ExpansionTile(
+      //               leading: Icon(Icons.bar_chart_sharp),
+      //               title: Text('Energy Report'),
+      //               children: [
+      //                 ListTile(
+      //                   leading: Text('   '),
+      //                   title: Text('Energy Usage Daily'),
+      //                   onTap: () {
+      //                     Navigator.pushReplacementNamed(
+      //                         context, '/energyUsageDaily');
+      //                   },
+      //                 ),
+      //                 ListTile(
+      //                   leading: Text('   '),
+      //                   title: Text('Energy Usage Monthly'),
+      //                   onTap: () {
+      //                     Navigator.pushReplacementNamed(
+      //                         context, '/energyUsageMonthly');
+      //                   },
+      //                 ),
+      //                 ListTile(
+      //                   leading: Text('   '),
+      //                   title: Text('Energy Usage yearly'),
+      //                   onTap: () {
+      //                     Navigator.pushReplacementNamed(
+      //                         context, '/energyUsageYearly');
+      //                   },
+      //                 ),
+      //                 ListTile(
+      //                   leading: Text('   '),
+      //                   title: Text('History Graph'),
+      //                   onTap: () {
+      //                     Navigator.pushReplacementNamed(
+      //                         context, '/historyGraph');
+      //                   },
+      //                 ),
+      //               ],
+      //             );
+      //           } else if (index == 4) {
+      //             return ListTile(
+      //               leading: Icon(Icons.logout_sharp),
+      //               title: Text('Logout'),
+      //               onTap: () {
+      //                 Navigator.pushReplacementNamed(context, '/');
+      //               },
+      //             );
+      //           }
+      //           return SizedBox.shrink();
+      //         },
+      //       ),
+      //     ),
+      //   ),
+      // ),

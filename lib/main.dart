@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:testest/Energy_Report/energyUsageDaily.dart';
 import 'package:testest/Energy_Report/energyUsageMonthly.dart';
 import 'package:testest/Energy_Report/energyUsageYearly.dart';
@@ -9,10 +10,12 @@ import 'package:testest/Metering_Management/profile.dart';
 import 'dart:convert' show utf8;
 
 import 'package:testest/Power%20Status/hompage.dart';
+import 'package:testest/login/editProfile.dart';
 import 'package:testest/login/login.dart';
+import 'package:testest/login/userProfile.dart';
 import 'package:testest/test.dart';
-import 'package:testest/user.dart/changePassword.dart';
-import 'package:testest/user.dart/userProfile.dart';
+
+import 'package:testest/login/changePassword.dart';
 
 void main() {
   utf8.decoder;
@@ -32,15 +35,17 @@ class MyApp extends StatelessWidget {
 
   MaterialApp buildMaterialApp() {
     return MaterialApp(
+      
       initialRoute: '/',
       routes: {
         // '/': (context) => ChartPage(),
         // '/': (context) => MyTest(),
-        '/': (context) => Login(),//Login
+        '/': (context) => Login(), //Login
         '/home': (context) => MyHomePage(), //MyHomePage(),
         //User Profile
-        'userProfile': (context) => UserProfile(), //UserProfile
-        'changePassword': (context) => ChangePassword(), //ChangePassword
+        '/userProfile': (context) => UserProfile(), //UserProfile
+        '/changePassword': (context) => ChangePassword(), //ChangePassword
+        '/editProfile' :(context) => EditProfile(),
         //User Profile
         //Metering_Management
         '/groupMeter': (context) => GroupMeter(), //GroupMeter(),
@@ -54,6 +59,7 @@ class MyApp extends StatelessWidget {
         '/energyUsageYearly': (context) =>
             EnergyUsageYearly(), //EnergyUsageYearly
         '/historyGraph': (context) => HistoryGraph(), //HistoryGraph
+        // '/homePage': (context) => HomePage(),
         //Reports
       },
     );
